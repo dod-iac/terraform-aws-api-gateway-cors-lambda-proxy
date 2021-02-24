@@ -1,3 +1,7 @@
+/*
+ * # CORS Lambda Proxy
+ */
+
 # https://github.com/squidfunk/terraform-aws-api-gateway-enable-cors
 
 # Copyright (c) 2018-2020 Martin Donath <martin.donath@squidfunk.com>
