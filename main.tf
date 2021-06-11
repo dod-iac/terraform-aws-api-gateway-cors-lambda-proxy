@@ -1,5 +1,5 @@
 /*
- * # Terraform AWS API Gateway Lambda Proxy
+ * # Terraform AWS API Gateway CORS Lambda Proxy
  *
  * ## Description
  *
@@ -11,7 +11,7 @@
  *
  * ``` hcl
  * module "cors_lambda" {
- *   source = "dds-cw/api-gateway-lambda-proxy/aws"
+ *   source = "dds-cw/api-gateway-cors-lambda-proxy/aws"
  *   version = "0.0.1"
  *
  *   api_id            = aws_api_gateway_rest_api.main_api.id
