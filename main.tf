@@ -1,30 +1,45 @@
 /*
- * # CORS Lambda Proxy
+ * # Terraform AWS API Gateway Lambda Proxy
+ *
+ * ## Description
+ *
+ * A Terraform module to create a Cross-Origin Resource Sharing (CORS) Lambda Proxy.
+ *
+ * Orignal code forked from [squidfunk/terraform-aws-api-gateway-enable-cors](https://github.com/squidfunk/terraform-aws-api-gateway-enable-cors)
+ *
+ * ## Usage
+ *
+ * ``` hcl
+ * module "cors_lambda" {
+ *   source = "dds-cw/api-gateway-lambda-proxy/aws"
+ *   version = "0.0.1"
+ *
+ *   api_id            = aws_api_gateway_rest_api.main_api.id
+ *   api_resource_id   = aws_api_gateway_resource.main_api_streams_resource.id
+ *   http_method       = "GET"
+ *   invoke_arn        = aws_lambda_function.stream_lambda.invoke_arn
+ *   invoke_policy_arn = aws_iam_role.api_role.arn
+ *   allow_methods = [
+ *     "OPTIONS",
+ *     "GET"
+ *   ]
+ *   allow_headers = [
+ *     "Authorization",
+ *     "Content-Type",
+ *     "X-Amz-Date",
+ *     "X-Amz-Security-Token",
+ *     "X-Api-Key",
+ *     "next-query",
+ *   ]
+ * }
+ * ```
+ *
+ * By default, this will create a new `MOCK` endpoint on the provided API Gateway
+ * resource allowing CORS preflight requests for **all methods** and
+ * **all origins** by default. Of course this can be customized using variables
+ * as stated in the next section.
+ *
  */
-
-# https://github.com/squidfunk/terraform-aws-api-gateway-enable-cors
-
-# Copyright (c) 2018-2020 Martin Donath <martin.donath@squidfunk.com>
-
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to
-# deal in the Software without restriction, including without limitation the
-# rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
-# sell copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
-
-# The above copyright notice and this permission notice shall be included in
-# all copies or substantial portions of the Software.
-
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-# FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
-# IN THE SOFTWARE.
-
-# Modifications: Mathew Boston
 
 # -----------------------------------------------------------------------------
 # Resources: API Gateway
