@@ -11,8 +11,8 @@ Orignal code forked from [squidfunk/terraform-aws-api-gateway-enable-cors](https
 
 ``` hcl
 module "cors_lambda" {
-  source = "dds-cw/api-gateway-cors-lambda-proxy/aws"
-  version = "0.0.1"
+  source = "dod-iac/api-gateway-cors-lambda-proxy/aws"
+  version = "1.0.0"
 
   api_id            = aws_api_gateway_rest_api.main_api.id
   api_resource_id   = aws_api_gateway_resource.main_api_streams_resource.id
